@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Develop Verse - Complete Digital Education Ecosystem
   
 **"Yaha se padhega Bharat, tabhi aage badhega Bharat"**
@@ -64,3 +65,6 @@ Check out the [Convex docs](https://docs.convex.dev/) for more information on ho
 User-defined http routes are defined in the `convex/router.ts` file. We split these routes into a separate file from `convex/http.ts` to allow us to prevent the LLM from modifying the authentication routes.
 
 ## Jai Hind 🇮🇳
+=======
+# Develop_Verse
+>>>>>>> 9a7384ebdf7d7a430f0e733e3b0ab679be9a89c6
