@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Test</title>
+</head>
+<body>
+    <h1>Testing Develop Verse</h1>
+    <div id="test-results"></div>
+    
+    <script>
+        async function testPages() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '<p>Testing pages...</p>';
+            
+            const pages = [
+                { name: 'Dashboard', url: 'http://localhost:5175/' },
+                { name: 'Academics', url: 'http://localhost:5175/academics' },
+                { name: 'Exams', url: 'http://localhost:5175/exams' },
+                { name: 'Fitness', url: 'http://localhost:5175/fitness' },
+                { name: 'Wellness', url: 'http://localhost:5175/mental-health' },
+                { name: 'Chess', url: 'http://localhost:5175/chess' },
+                { name: 'Admin', url: 'http://localhost:5175/admin' }
+            ];
+            
+            let html = '<h2>Page Test Results:</h2><ul>';
+            
+            for (const page of pages) {
+                try {
+                    const response = await fetch(page.url);
+                    if (response.ok) {
+                        html += `<li style="color: green;">✅ ${page.name}: OK</li>`;
+                    } else {
+                        html += `<li style="color: red;">❌ ${page.name}: Error ${response.status}</li>`;
+                    }
+                } catch (error) {
+                    html += `<li style="color: red;">❌ ${page.name}: ${error.message}</li>`;
+                }
+            }
+            
+            html += '</ul>';
+            html += '<p><a href="http://localhost:5175" target="_blank">Open Main App</a></p>';
+            results.innerHTML = html;
+        }
+        
+        testPages();
+    </script>
+</body>
+</html>

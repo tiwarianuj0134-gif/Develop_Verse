@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Pages - Develop Verse</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        .test-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .test-button:hover {
+            background-color: #0056b3;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .page-card {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .page-card:hover {
+            border-color: #007bff;
+            transform: translateY(-2px);
+        }
+        .page-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Debug Pages - Develop Verse</h1>
+    
+    <div class="test-container">
+        <h2>Current Status</h2>
+        <div class="info">
+            <strong>Issues Reported:</strong>
+            <ul>
+                <li>❌ Academic page not working</li>
+                <li>❌ Exam page not working</li>
+                <li>❌ Chess page not working</li>
+                <li>❌ Wellness page not working</li>
+                <li>✅ Admin hidden from navbar (FIXED)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>🎯 Quick Page Tests</h2>
+        <div class="success">
+            <strong>Test each page individually:</strong>
+        </div>
+        
+        <div class="grid">
+            <div class="page-card">
+                <div class="page-icon">🏠</div>
+                <h3>Dashboard</h3>
+                <a href="http://localhost:5175/" target="_blank" class="test-button">Test Dashboard</a>
+            </div>
+            
+            <div class="page-card">
+                <div class="page-icon">📚</div>
+                <h3>Academics</h3>
+                <a href="http://localhost:5175/academics" target="_blank" class="test-button">Test Academics</a>
+            </div>
+            
+            <div class="page-card">
+                <div class="page-icon">🎯</div>
+                <h3>Exams</h3>
+                <a href="http://localhost:5175/exams" target="_blank" class="test-button">Test Exams</a>
+            </div>
+            
+            <div class="page-card">
+                <div class="page-icon">💪</div>
+                <h3>Fitness</h3>
+                <a href="http://localhost:5175/fitness" target="_blank" class="test-button">Test Fitness</a>
+            </div>
+            
+            <div class="page-card">
+                <div class="page-icon">🧘</div>
+                <h3>Wellness</h3>
+                <a href="http://localhost:5175/mental-health" target="_blank" class="test-button">Test Wellness</a>
+            </div>
+            
+            <div class="page-card">
+                <div class="page-icon">♟️</div>
+                <h3>Chess</h3>
+                <a href="http://localhost:5175/chess" target="_blank" class="test-button">Test Chess</a>
+            </div>
+            
+            <div class="page-card">
+                <div class="page-icon">⚙️</div>
+                <h3>Admin (Hidden)</h3>
+                <a href="http://localhost:5175/admin" target="_blank" class="test-button">Test Admin</a>
+                <p><small>Password: Anuj@1234</small></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>🔧 Debugging Steps</h2>
+        <div class="info">
+            <strong>How to debug:</strong>
+            <ol>
+                <li>Open each page link above in a new tab</li>
+                <li>Open browser console (F12)</li>
+                <li>Look for any error messages</li>
+                <li>Check if the page loads correctly</li>
+                <li>Test navigation between pages</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>🚀 Expected Behavior</h2>
+        <div class="success">
+            <strong>What should work:</strong>
+            <ul>
+                <li>✅ All pages should load without errors</li>
+                <li>✅ Navigation should work smoothly</li>
+                <li>✅ Admin should only be accessible via /admin URL</li>
+                <li>✅ Admin should require password "Anuj@1234"</li>
+                <li>✅ Chess game should be playable</li>
+                <li>✅ All content should be visible</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>📊 Server Status</h2>
+        <div id="server-status" class="info">
+            <strong>Checking server status...</strong>
+        </div>
+        <button onclick="checkServerStatus()" class="test-button">🔄 Refresh Status</button>
+    </div>
+
+    <script>
+        async function checkServerStatus() {
+            const statusDiv = document.getElementById('server-status');
+            statusDiv.innerHTML = '<strong>Checking server status...</strong>';
+            
+            try {
+                const response = await fetch('http://localhost:5175/');
+                if (response.ok) {
+                    statusDiv.innerHTML = '<strong style="color: green;">✅ Server is running on http://localhost:5175</strong>';
+                    statusDiv.className = 'success';
+                } else {
+                    statusDiv.innerHTML = '<strong style="color: red;">❌ Server responded with error: ' + response.status + '</strong>';
+                    statusDiv.className = 'error';
+                }
+            } catch (error) {
+                statusDiv.innerHTML = '<strong style="color: red;">❌ Server is not accessible: ' + error.message + '</strong>';
+                statusDiv.className = 'error';
+            }
+        }
+
+        // Check server status on page load
+        checkServerStatus();
+
+        // Auto-refresh every 30 seconds
+        setInterval(checkServerStatus, 30000);
+    </script>
+</body>
+</html>

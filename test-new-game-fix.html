@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess New Game Button Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        .test-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background-color: #0056b3;
+        }
+        .console-output {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chess New Game Button Fix Test</h1>
+    
+    <div class="test-container">
+        <h2>Test Instructions</h2>
+        <div class="info">
+            <strong>How to test the New Game button fix:</strong>
+            <ol>
+                <li>Open the chess game at <a href="http://localhost:5175" target="_blank">http://localhost:5175</a></li>
+                <li>Navigate to the Chess page</li>
+                <li>If a restore dialog appears, click the "New Game" button</li>
+                <li>Check the browser console (F12) for debug messages</li>
+                <li>Verify that a new game actually starts (pieces should be in starting position)</li>
+                <li>Try clicking "New Game" from the game controls panel</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>Expected Console Output</h2>
+        <div class="success">
+            When the New Game button works correctly, you should see these console messages:
+        </div>
+        <div class="console-output">🎮 New Game button clicked!
+Current showRestoreDialog state: true
+🖱️ New Game button mouse down
+🖱️ New Game button mouse up
+🔄 Closing dialog and starting new game...
+🗑️ Clearing saved state...
+⚙️ Creating new game manager...
+🔄 Setting new game manager
+🔄 Setting new game state: {fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", ...}
+✅ New game started successfully!
+New game state: {fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", ...}
+New game FEN: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+Move history length: 0</div>
+    </div>
+
+    <div class="test-container">
+        <h2>Key Fixes Applied</h2>
+        <div class="success">
+            <strong>✅ Fixed Issues:</strong>
+            <ul>
+                <li><strong>State Update Race Condition:</strong> Added functional state updates to prevent React batching issues</li>
+                <li><strong>Component Re-render:</strong> Added gameKey state to force component re-mounting when new game starts</li>
+                <li><strong>Dialog Re-appearance:</strong> Improved useEffect logic to prevent dialog from re-triggering after dismissal</li>
+                <li><strong>Memory Cleanup:</strong> Added proper cleanup of previous game manager instances</li>
+                <li><strong>State Synchronization:</strong> Ensured all game state variables are properly reset</li>
+                <li><strong>Debug Logging:</strong> Enhanced console logging to track state changes</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>Test Results</h2>
+        <div id="test-results">
+            <div class="info">
+                <strong>Manual Testing Required:</strong><br>
+                Please test the application manually using the instructions above and verify that:
+                <ul>
+                    <li>The dialog closes when "New Game" is clicked</li>
+                    <li>A fresh chess game starts (pieces in starting position)</li>
+                    <li>The board is interactive and pieces can be moved</li>
+                    <li>No page refresh occurs</li>
+                    <li>Console shows successful game creation messages</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>Quick Actions</h2>
+        <button class="test-button" onclick="window.open('http://localhost:5175', '_blank')">
+            🎮 Open Chess Game
+        </button>
+        <button class="test-button" onclick="window.open('http://localhost:5175/chess', '_blank')">
+            ♟️ Direct to Chess Page
+        </button>
+        <button class="test-button" onclick="clearLocalStorage()">
+            🗑️ Clear Local Storage
+        </button>
+    </div>
+
+    <script>
+        function clearLocalStorage() {
+            try {
+                localStorage.clear();
+                alert('Local storage cleared! This will force a fresh start when you reload the chess game.');
+            } catch (error) {
+                alert('Failed to clear local storage: ' + error.message);
+            }
+        }
+
+        // Auto-refresh this page every 30 seconds to show latest status
+        setTimeout(() => {
+            location.reload();
+        }, 30000);
+    </script>
+</body>
+</html>
